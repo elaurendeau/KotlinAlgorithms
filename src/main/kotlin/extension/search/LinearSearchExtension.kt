@@ -7,7 +7,6 @@ package extension.search
  * @return [Int] index of the searched value. -1 when the value is not found
  */
 fun Array<Int>.linearSearchIndexOf(value: Int): Int {
-    run breaker@{
         this.forEachIndexed { index, i ->
             if(i == value) {
                 return index
@@ -15,5 +14,4 @@ fun Array<Int>.linearSearchIndexOf(value: Int): Int {
         }
 
         return -1
-    }
 }

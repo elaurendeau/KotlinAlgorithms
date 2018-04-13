@@ -8,7 +8,7 @@ import constant.AlgorithmConstant
  * @param value [Int] value to search
  * @return [Int] index of the searched value. -1 when the value is not found
  */
-fun Array<Int>.binaryIndexOf(value: Int): Int {
+fun Array<Int>.binarySearchIndexOf(value: Int): Int {
     /**
      * Recursive method to search. Each pass of the method should reduce the query range by half.
      *

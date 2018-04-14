@@ -22,28 +22,18 @@ fun Array<Int>.ternarySearchIndexOf(value: Int): Int {
      */
     fun recursiveSearch(array: Array<Int>, value: Int, lowerBound: Int, higherBound: Int): Int {
 
-        if (lowerBound > higherBound) {
-            return -1
-        }
-
         val middleLowerBound = lowerBound + ((higherBound - lowerBound) / 3)
-        val middleLowerValue = array[middleLowerBound]
-        val middleHigherBound = lowerBound + middleLowerBound
-        val middleHigherValue = array[middleHigherBound]
-        val higherValue = array[higherBound]
-        val lowerValue = array[lowerBound]
-
+        val middleHigherBound = higherBound - ((higherBound - lowerBound) / 3)
 
         return when {
-            higherValue < value -> -1
-            higherValue == value -> higherBound
-            middleHigherBound < value -> recursiveSearch(array, value, middleHigherBound+1, higherBound)
-            middleHigherValue == value -> middleHigherBound
-            middleLowerValue < value -> recursiveSearch(array, value, middleLowerBound+1, middleHigherBound)
-            middleLowerValue == value -> middleLowerBound
-            lowerValue > value -> -1
+            array[higherBound] < value -> -1
+            array[higherBound] == value -> higherBound
+            array[middleHigherBound] < value -> recursiveSearch(array, value, middleHigherBound+1, higherBound)
+            array[middleHigherBound] == value -> middleHigherBound
+            array[middleLowerBound] < value -> recursiveSearch(array, value, middleLowerBound+1, middleHigherBound)
+            array[middleLowerBound] == value -> middleLowerBound
+            array[lowerBound] > value -> -1
             else -> recursiveSearch(array, value, lowerBound, middleLowerBound)
-
         }
 
     }

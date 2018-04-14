@@ -4,7 +4,7 @@ import constant.AlgorithmConstant
 import extension.isSorted
 
 /**
- * Recursive ternary search
+ * A ternary search determines either that the minimum or maximum cannot be in the first third of the domain or that it cannot be in the last third of the domain, then repeats on the remaining third
  * @param array [Array]<[Int]> sorted array
  * @param value [Int] value to search
  * @return [Int] index of the searched value. -1 when the value is not found
@@ -27,12 +27,12 @@ fun Array<Int>.ternarySearchIndexOf(value: Int): Int {
 
         return when {
             array[higherBound] < value -> -1
+            array[lowerBound] > value -> -1
             array[higherBound] == value -> higherBound
             array[middleHigherBound] < value -> recursiveSearch(array, value, middleHigherBound+1, higherBound)
             array[middleHigherBound] == value -> middleHigherBound
             array[middleLowerBound] < value -> recursiveSearch(array, value, middleLowerBound+1, middleHigherBound)
             array[middleLowerBound] == value -> middleLowerBound
-            array[lowerBound] > value -> -1
             else -> recursiveSearch(array, value, lowerBound, middleLowerBound)
         }
 

@@ -4,12 +4,12 @@ import constant.AlgorithmConstant
 import extension.isSorted
 
 /**
- * Recursive binary search
+ * Recursive ternary search
  * @param array [Array]<[Int]> sorted array
  * @param value [Int] value to search
  * @return [Int] index of the searched value. -1 when the value is not found
  */
-fun Array<Int>.binarySearchIndexOf(value: Int): Int {
+fun Array<Int>.ternarySearchIndexOf(value: Int): Int {
     /**
      * Recursive method to search. Each pass of the method should reduce the query range by half.
      *
@@ -26,13 +26,24 @@ fun Array<Int>.binarySearchIndexOf(value: Int): Int {
             return -1
         }
 
-        val currentIndex = lowerBound + ((higherBound - lowerBound) / 2)
-        val currentValue = array[currentIndex]
+        val middleLowerBound = lowerBound + ((higherBound - lowerBound) / 3)
+        val middleLowerValue = array[middleLowerBound]
+        val middleHigherBound = lowerBound + middleLowerBound
+        val middleHigherValue = array[middleHigherBound]
+        val higherValue = array[higherBound]
+        val lowerValue = array[lowerBound]
+
 
         return when {
-            currentValue == value -> currentIndex
-            currentValue < value -> recursiveSearch(array, value, currentIndex + 1, higherBound)
-            else -> recursiveSearch(array, value, lowerBound, currentIndex - 1)
+            higherValue < value -> -1
+            higherValue == value -> higherBound
+            middleHigherBound < value -> recursiveSearch(array, value, middleHigherBound+1, higherBound)
+            middleHigherValue == value -> middleHigherBound
+            middleLowerValue < value -> recursiveSearch(array, value, middleLowerBound+1, middleHigherBound)
+            middleLowerValue == value -> middleLowerBound
+            lowerValue > value -> -1
+            else -> recursiveSearch(array, value, lowerBound, middleLowerBound)
+
         }
 
     }

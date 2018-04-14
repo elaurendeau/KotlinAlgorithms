@@ -1,4 +1,4 @@
-package extension.search
+package extension
 
 /**
  * Function used to know if an array is sorted
